@@ -9,14 +9,11 @@
 # Dada la matriz W, disene un plan de viaje para el vendedor que recorra las 6 ciudades, de tal forma que minimize el valor total del viaje. 
 # travelplan (W)
 
-
-
 import numpy as np
 
-# Analiza que la matriz este bien conformada
-
+# Hay que mirar que la matriz este bien conformada
 def chequearMatriz(W):
-    print("Analizando la conformacion de la matriz...")
+    print("Chequeando la conformacion de la matriz...")
     M=np.matrix(W,dtype=np.int)
     n=M.shape
 
@@ -26,6 +23,9 @@ def chequearMatriz(W):
                 print("ERROR: Uno de los elementos de la diagonal principal no es cero")
                 return False
 
+# La diagonal principal debe estar conformada por ceros, debido a que alli se encuentran, 
+# el costo de W_ii, W_jj...y asi con todas las ciudades, y dado que ir de la ciudad i a i no hay costo, es cero
+
         print("...OK")
         return True
     else:
@@ -33,18 +33,15 @@ def chequearMatriz(W):
         return False
 
 
-# FUNCION PARA REVISAR UNA FILA, BUSCAR EL VALOR MINIMO y RETORNAR EL VALOR CON SU POSICION
-# RETORNA [Valor, fila, columna]
-
+# Funcion para revisar las filas, buscar el valor minimo  y retornar el valor con su posicion
+# Rrtorna [Valor, fila, columna]
 def valorMinimo(arr,fila):
-
     M=np.matrix(arr,dtype=np.int)
     n=M.shape
     referencia=np.array([M[fila,0],0,0])
 
     for i in range(n[1]):
         a=M[fila,i]
-
         if ((a<referencia[0]) and not(a==0)) or (not(a==0) and (referencia[0]==0)):
             referencia[0]=a
             referencia[1]=fila
@@ -53,8 +50,7 @@ def valorMinimo(arr,fila):
     return referencia
 
 
-# FUNCION QUE LLENA DE CEROS UNA COLUMNA
-
+# Funcion que llena una columna de ceros
 def llenarDeCeros(arr,columna):
     M=np.matrix(arr,dtype=np.int)
     n=M.shape
@@ -63,7 +59,7 @@ def llenarDeCeros(arr,columna):
 
     return M
 
-
+# Funcion que calcula 
 def travelplan(W):
     if chequearMatriz(W) == True:
         M=np.matrix(W,dtype=np.int)
